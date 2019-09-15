@@ -11,9 +11,38 @@ export class ServerComponent implements OnInit {
 
   constructor() { }
 
+  color: string;
+  buttonText: string;
+
   @Input() server: Server;
 
   ngOnInit() {
+    this.setServerStatus(this.server.isOnline);
+  }
+
+
+
+  setServerStatus(isOnline: boolean){
+    
+    if(isOnline)
+    {
+      this.server.isOnline = true;
+      this.color = '#66BB6A';
+      this.buttonText = 'Shut Down';
+    }
+    else
+    {
+      this.server.isOnline = false;
+      this.color = '#FF6B6B';
+      this.buttonText = 'Start';
+    }
+
+  }
+
+  toggleStatus(onlineStatus: boolean) {
+    console.log(this.server.name, ': ', onlineStatus);
+    this.setServerStatus(!onlineStatus);
   }
 
 }
+
